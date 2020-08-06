@@ -1,5 +1,5 @@
 // variable to store and loop through scheduler
-var myDay = [
+var mDay = [
     {
         id: "0",
         hour: "09",
@@ -75,22 +75,22 @@ function getHeaderDate() {
 
 // saves data to localStorage
 function saveReminders() {
-    localStorage.setItem("myDay", JSON.stringify(myDay));
+    localStorage.setItem("mDay", JSON.stringify(mDay));
 }
 
-// sets any data in localStorage to the view
+// gets any data in localStorage to the view
 function displayReminders() {
-    myDay.forEach(function (_thisHour) {
+    mDay.forEach(function (_thisHour) {
         $(`#${_thisHour.id}`).val(_thisHour.reminder);
     })
 }
 
 // sets any existing localStorage data to the view if it exists
 function init() {
-    var storedDay = JSON.parse(localStorage.getItem("myDay"));
+    var storedDay = JSON.parse(localStorage.getItem("mDay"));
 
     if (storedDay) {
-        myDay = storedDay;
+        mDay = storedDay;
     }
 
     saveReminders();
@@ -101,7 +101,7 @@ function init() {
 getHeaderDate();
 
 // creates the visuals for the scheduler body
-myDay.forEach(function(thisHour) {
+mDay.forEach(function(thisHour) {
     // creates timeblocks row
     var hourRow = $("<form>").attr({
         "class": "row"
@@ -155,7 +155,7 @@ init();
 $(".saveBtn").on("click", function(event) {
     event.preventDefault();
     var saveIndex = $(this).siblings(".description").children(".future").attr("id");
-    myDay[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+    mDay[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
     console.log(saveIndex);
     saveReminders();
     displayReminders();
